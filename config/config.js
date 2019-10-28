@@ -8,10 +8,10 @@ module.exports = {
 		"dialectModule": require('mysql2'),
   },
 	"production": {
-		"username": "root",
-		"password": null,
-		"database": "database_production",
-		"host": "127.0.0.1",
+		"username": "cfe33jc4u09jvf10",
+		"password": "kg9v1pyiklsui8mf",
+		"database": "ra3atg2uxzlnqydd",
+		"host": "q3vtafztappqbpzn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
 		"dialect": "mysql",
 	},
   // "test": {
