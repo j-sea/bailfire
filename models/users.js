@@ -57,10 +57,5 @@ module.exports = (sequelize, DataTypes) => {
 	Users.beforeCreate(function (user) {
 		user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 	});
-	Users.beforeBulkCreate(function (users) {
-		users.forEach(function (user) {
-			user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
-		});
-	});
 	return Users;
 };
