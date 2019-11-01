@@ -3,7 +3,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-
         //auto generate UUID format - can be UUIDV1 or UUIDV4
         uuid: {
             type: DataTypes.UUID,
@@ -11,21 +10,19 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
-        name: {
+        group_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         description: DataTypes.STRING,
 
         deleted: {
-            type: Boolean,
-            default: false,
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
             allowNull: false,
         },
-
-    }, {});
+    });
     Groups.associate = function (models) {
-        //TODO:
         Groups.hasMany(models.GroupInvites);
         Groups.hasMany(models.GroupUserDetails);
         Groups.hasMany(models.GroupChats);

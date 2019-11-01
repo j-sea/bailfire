@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const GroupChats = sequelize.define('GroupChats'{
+    const GroupChats = sequelize.define('GroupChats', {
         message: DataTypes.STRING,
         edited: {
-            type: BOOLEAN,
-            default: false
+            type: DataTypes.BOOLEAN,
+            default: 0
         },
     }, {});
     GroupChats.associate = function (models) {

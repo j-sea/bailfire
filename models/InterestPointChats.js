@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         edited: {
-            type: BOOLEAN,
-            default: false
+            type: DataTypes.BOOLEAN,
+            default: 0
         },
     }, {});
     InterestPointChats.associate = function (models) {

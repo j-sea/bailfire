@@ -2,8 +2,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     const GroupUserDetails = sequelize.define('GroupUserDetails', {
-
-
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -18,8 +16,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        geolocation: {
-            type: DataTypes.GEOGRAPHY,
+        latitude: {
+            type: DataTypes.FLOAT,
+        },
+        longitude: {
+            type: DataTypes.FLOAT,
         },
         geolocation_accuracy: {
             type: DataTypes.FLOAT,

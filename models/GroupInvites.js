@@ -1,4 +1,4 @@
-'use Strict';
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
     const GroupInvites = sequelize.define('GroupInvites', {
@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
             unique: true
         },
         accepted: {
-            type: Boolean,
+            type: DataTypes.BOOLEAN,
             default: false,
             allowNull: false,
         },
         rejected: {
-            type: Boolean,
+            type: DataTypes.BOOLEAN,
             default: false,
             allowNull: false,
         },
