@@ -6,18 +6,17 @@ module.exports = (sequelize, DataTypes) => {
 
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,
-            unique: false,
+            allowNull: false,
+            defaultValue: ''
         },
         photo_url: DataTypes.STRING,
         color: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
         },
         geolocation: {
             type: DataTypes.GEOGRAPHY,

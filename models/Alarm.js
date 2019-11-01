@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {});
     Alarm.associate = function (models) {
-        Alarm.belongsTo(model.InterestPoints);
-        Alarm.belongsTo(model.Groups);
+        Alarm.belongsTo(models.InterestPoints);
+        Alarm.belongsTo(models.Groups);
     };
     return Alarm;
 }
