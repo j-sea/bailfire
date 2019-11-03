@@ -26,7 +26,7 @@ router.post("/sms", function (req, res) {
             to: '+12064769484',  // Text this number
             from: process.env.TWILIO_NUMBER // From a valid Twilio number
             // from: '+19792272939' // From a valid Twilio number
-            statusCallback: 'https://postb.in/1572809055005-8314476483501',
+            // statusCallback: 'https://postb.in/1572809055005-8314476483501',
             // statusCallbackMethod: "POST"
         })
         .then((message) => {
