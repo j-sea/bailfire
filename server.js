@@ -1,6 +1,6 @@
 const express = require('express');
-const db = require('./models');
-// const routes = require('./routes');
+// const db = require('./models');
+const routes = require('./routes');
 
 var PORT = process.env.PORT || 8080;
 
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set up Express to use our external routes
-// app.use(routes);
+app.use(routes);
 
 // db.sequelize.sync({ force: true }) // Drop all data, and Recreate the tables
 // db.sequelize.sync() // Keep all data, and Initialize the tables
