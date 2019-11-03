@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const GroupChats = sequelize.define('GroupChats'{
+    const GroupChats = sequelize.define('GroupChats', {
+				user_uuid: DataTypes.UUID,
         message: DataTypes.STRING,
         edited: {
-            type: BOOLEAN,
+            type: DataTypes.BOOLEAN,
             default: false
         },
     }, {});

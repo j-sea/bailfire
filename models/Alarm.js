@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: DataTypes.STRING,
         meeting_time: {
-            type: DataTypes.Date,
+            type: DataTypes.DATE,
             allowNull: false,
         },
     }, {});

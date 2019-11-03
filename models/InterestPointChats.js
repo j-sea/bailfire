@@ -2,12 +2,13 @@
 
 module.exports = (sequelize, DataTypes) => {
     const InterestPointChats = sequelize.define('InterestPointChats', {
+				user_uuid: DataTypes.UUID,
         message: {
             type: DataTypes.STRING,
             allowNull: false
         },
         edited: {
-            type: BOOLEAN,
+            type: DataTypes.BOOLEAN,
             default: false
         },
     }, {});

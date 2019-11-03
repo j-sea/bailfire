@@ -2,6 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
     const InterestPoints = sequelize.define('InterestPoints', {
+				group_uuid: DataTypes.UUID,
         name: {
             type: DataTypes.STRING,
             allowNull: false,
