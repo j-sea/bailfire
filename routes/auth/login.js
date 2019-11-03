@@ -18,7 +18,7 @@ router.post("/auth/login", function(req, res) {
 
 		const authorizedOrigins = [
 			'http://localhost:3000',
-			'https://skatter.herokuapp.com',
+			'https://scatter-web.herokuapp.com',
 		];
 		
 		if (dbUser
