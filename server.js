@@ -9,7 +9,7 @@ const app = express();
 app.use(function(req, res, next) {
 	const authorizedOrigins = [
 		'http://localhost:3000',
-		'https://skatter.herokuapp.com',
+		'https://scatter-web.herokuapp.com',
 	];
 
 	console.log(req.headers);
