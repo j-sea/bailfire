@@ -4,23 +4,26 @@ module.exports = (sequelize, DataTypes) => {
     const GroupInvites = sequelize.define('GroupInvites', {
 
         //auto generate UUID format - can be UUIDV1 or UUIDV4
-        uuid: {
+        invite_uuid: {
             type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
+        },
+        group_uuid: {
+            type: DataTypes.UUID,
         },
         guest_user_uuid: {
             type: DataTypes.UUID,
             unique: true
         },
         accepted: {
-            type: Boolean,
+            type: DataTypes.BOOLEAN,
             default: false,
             allowNull: false,
         },
         rejected: {
-            type: Boolean,
+            type: DataTypes.BOOLEAN,
             default: false,
             allowNull: false,
         },

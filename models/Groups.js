@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
 
         //auto generate UUID format - can be UUIDV1 or UUIDV4
-        uuid: {
+        group_uuid: {
             type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         description: DataTypes.STRING,
 
         deleted: {
-            type: Boolean,
+            type: DataTypes.BOOLEAN,
             default: false,
             allowNull: false,
         },
