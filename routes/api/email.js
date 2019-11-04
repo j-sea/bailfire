@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
