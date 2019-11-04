@@ -18,9 +18,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        geolocation: {
-            type: DataTypes.GEOGRAPHY,
-        },
+        longitude: DataTypes.FLOAT,
+        latitude: DataTypes.FLOAT,
         geolocation_accuracy: {
             type: DataTypes.FLOAT,
         },
@@ -31,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {});
     GroupUserDetails.associate = function (models) {
-        GroupUserDetails.belongsTo(models.Groups);
-        GroupUserDetails.belongsTo(models.Users);
+        // GroupUserDetails.belongsTo(models.Groups);
+        // GroupUserDetails.belongsTo(models.Users);
     };
     return GroupUserDetails;
 }
