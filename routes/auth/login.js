@@ -51,7 +51,7 @@ router.post("/auth/login", function(req, res) {
 			}
 			else {
 				res.cookie('access_token', accessToken, {
-					domain: req.headers.origin,
+					// domain: req.headers.origin,
 					path: '/',
 					expires: new Date(Date.now() + expiresIn * 1000),
 					httpOnly: true,
