@@ -6,6 +6,8 @@ var PORT = process.env.PORT || 8080;
 
 const app = express();
 
+app.set('trust proxy', 'loopback');
+
 app.use(function(req, res, next) {
 	const authorizedOrigins = [
 		'http://localhost:3000',
