@@ -55,7 +55,7 @@ router.post("/auth/login", function(req, res) {
 					path: '/',
 					expires: new Date(Date.now() + expiresIn * 1000),
 					httpOnly: true,
-					secure: true,
+					// secure: true,
 				});
 			}
 
