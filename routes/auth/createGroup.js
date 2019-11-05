@@ -9,14 +9,29 @@ const db = require('../../models');
 const router = require('express').Router();
 
 router.post("/api/createGroup", function (req, res) {
-    db.Groups.create(req.body).then(function (dbGroups) {
+	// console.log(`top log:${req.signedCookies}`);
+	db.Groups.create(req.body).then(function (dbGroups) {
+		// console.log(`Inside function: ${req.signedCookies}`);
+		// res.cookie('user').send('cookie set');
+		// sends su'ccess status
+		res.status(200).send(dbGroups);
+	}).catch(function (err) {
+		throw err
+	})
+	// console.log(`outside function: ${req.signedCookies}`);
 
-        // sends success status
-        res.status(200).send(dbGroups);
-    })
-
-    console.log(req.body);
 });
 
 // Export these routers
 module.exports = router;
+
+// TODO: find where cookie is stored in req.body (?) Object, compare to access token using code below:
+
+			// jwt.verify(accessToken, process.env.JWT_SECRET_KEY, function(err, decoded) {
+			// 	if (err) {
+			// 		console.log('ERR: ' + err);
+			// 	}
+			// 	else {
+			// 		console.log('DEC: ' + JSON.stringify(decoded));
+			// 	}
+			// });
