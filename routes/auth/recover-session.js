@@ -4,7 +4,7 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
-router.post("/auth/recover-session", function(req, res) {
+router.get("/auth/recover-session", function(req, res) {
 	if (req.session.user) {
 		res.status(200).json(req.session.user);
 	}
