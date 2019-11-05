@@ -8,7 +8,7 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
-router.post("/api/createGroup", function (req, res) {
+router.post("/api/group", function (req, res) {
 	// console.log(`top log:${req.signedCookies}`);
 	db.Groups.create(req.body).then(function (dbGroups) {
 		// console.log(`Inside function: ${req.signedCookies}`);

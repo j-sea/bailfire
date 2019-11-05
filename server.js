@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(routes);
 
 // db.sequelize.sync({ force: true }) // Drop all data, and Recreate the tables
-db.sequelize.sync({ force: true }) // Keep all data, and Initialize the tables
+db.sequelize.sync({ force: false }) // Keep all data, and Initialize the tables
 	.then(function () {
 		// Start our server so that it can begin listening to client requests.
 		app.listen(PORT, function () {
