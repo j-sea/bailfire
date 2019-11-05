@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
 
         deleted: {
             type: DataTypes.BOOLEAN,
-            default: false,
-            // allowNull: false,
+            allowNull: false,
+            defaultValue: false,
         },
     });
     Groups.associate = function (models) {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         Groups.hasMany(models.GroupChats);
         Groups.hasMany(models.InterestPoints);
         Groups.hasMany(models.Alarm);
-        // Groups.belongsToMany(models.Users, { through: 'Groups' });
+        Groups.belongsToMany(models.Users, { through: 'UserGroups' });
     };
     return Groups;
 };

@@ -34,10 +34,9 @@ module.exports = (sequelize, DataTypes) => {
 		Users.hasMany(models.GroupUserDetails);
 		Users.hasMany(models.GroupChats);
 		Users.hasMany(models.InterestPointChats);
-		// Users.belongsToMany(models.Groups);
+		Users.belongsToMany(models.Groups, {through:"UserGroups"});
 	};
 	Users.beforeCreate(function (user) {
 		user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 	});
 	return Users;
-};

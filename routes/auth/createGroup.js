@@ -8,6 +8,7 @@ router.post("/api/group", function (req, res) {
 	db.Groups.create(req.body).then(function (dbGroups) {
 		// sends success status
 		res.status(200).send(dbGroups);
+		//TODO:dbUser.addGroup(123123)
 	}).catch(function (err) {
 		throw err
 	})
