@@ -8,85 +8,85 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
-router.post("/auth/login", function(req, res) {
+router.post("/auth/login", function (req, res) {
 	db.Users.findOne({
 		where: {
 			email: req.body.email,
 		}
 	})
-	.then(function (dbUser) {
-		if (!dbUser) {
-			res.status(401).send('Login credentials incorrect!');
-		}
-		else {
-			if (bcrypt.compareSync(req.body.password, dbUser.password)) {
-				//create new session property "user", set equal to logged in user
-				req.session.user = { id: dbUser.id, name: dbUser.name }
-				req.session.error = null;
-				res.status(200).json(req.session);
+		.then(function (dbUser) {
+			if (!dbUser) {
+				res.status(401).send('Login credentials incorrect!');
 			}
 			else {
-				//delete existing user, add error
-				req.session.user = false;
-				req.session.error = 'Login credentials incorrect!';
-				res.status(401).send("Login credentials incorrect!");
+				if (bcrypt.compareSync(req.body.password, dbUser.password)) {
+					//create new session property "user", set equal to logged in user
+					req.session.user = { id: dbUser.id, name: dbUser.name }
+					req.session.error = null;
+					res.status(200).json(req.session);
+				}
+				else {
+					//delete existing user, add error
+					req.session.user = false;
+					req.session.error = 'Login credentials incorrect!';
+					res.status(401).send("Login credentials incorrect!");
+				}
 			}
-		}
-		// const authorizedOrigins = [
-		// 	'http://localhost:3000',
-		// 	'https://scatter-web.herokuapp.com',
-		// ];
-		
-		// if (dbUser
-		// 	&& bcrypt.compareSync(req.body.password, dbUser.password)
-		// 	&& authorizedOrigins.indexOf(req.headers.origin) !== -1) {
+			// const authorizedOrigins = [
+			// 	'http://localhost:3000',
+			// 	'https://scatter-web.herokuapp.com',
+			// ];
 
-		// 	const expiresIn = 1 * 24 * 60 * 60; // One day
-		// 	const accessToken = jwt.sign({ id: dbUser.id }, process.env.JWT_SECRET_KEY, {
-		// 		expiresIn: expiresIn
-		// 	});
+			// if (dbUser
+			// 	&& bcrypt.compareSync(req.body.password, dbUser.password)
+			// 	&& authorizedOrigins.indexOf(req.headers.origin) !== -1) {
 
-		// 	// jwt.verify(accessToken, process.env.JWT_SECRET_KEY, function(err, decoded) {
-		// 	// 	if (err) {
-		// 	// 		console.log('ERR: ' + err);
-		// 	// 	}
-		// 	// 	else {
-		// 	// 		console.log('DEC: ' + JSON.stringify(decoded));
-		// 	// 	}
-		// 	// });
+			// 	const expiresIn = 1 * 24 * 60 * 60; // One day
+			// 	const accessToken = jwt.sign({ id: dbUser.id }, process.env.JWT_SECRET_KEY, {
+			// 		expiresIn: expiresIn
+			// 	});
 
-		// 	// Clear the hashed password before we send the user info
-		// 	dbUser.password = null;
+			// 	// jwt.verify(accessToken, process.env.JWT_SECRET_KEY, function(err, decoded) {
+			// 	// 	if (err) {
+			// 	// 		console.log('ERR: ' + err);
+			// 	// 	}
+			// 	// 	else {
+			// 	// 		console.log('DEC: ' + JSON.stringify(decoded));
+			// 	// 	}
+			// 	// });
 
-		// 	if (req.headers.origin === 'http://localhost:3000') {
-		// 		res.cookie('access_token', accessToken, {
-		// 			path: '/',
-		// 			expires: new Date(Date.now() + expiresIn * 1000),
-		// 			httpOnly: true,
-		// 		});
-		// 	}
-		// 	else {
-		// 		res.cookie('access_token', accessToken, {
-		// 			// domain: req.headers.origin,
-		// 			path: '/',
-		// 			expires: new Date(Date.now() + expiresIn * 1000),
-		// 			httpOnly: true,
-		// 			// secure: true,
-		// 		});
-		// 	}
+			// 	// Clear the hashed password before we send the user info
+			// 	dbUser.password = null;
 
-		// 	res.status(200).send({
-		// 		user: dbUser
-		// 	});
-		// }
-		// else {
-		// 	res.status(401).send('Login credentials invalid!');
-		// }
-	})
-	.catch(function (error) {
-		console.log(error);
-		res.status(500).send('Encountered server error when logging in!');
-	});
+			// 	if (req.headers.origin === 'http://localhost:3000') {
+			// 		res.cookie('access_token', accessToken, {
+			// 			path: '/',
+			// 			expires: new Date(Date.now() + expiresIn * 1000),
+			// 			httpOnly: true,
+			// 		});
+			// 	}
+			// 	else {
+			// 		res.cookie('access_token', accessToken, {
+			// 			// domain: req.headers.origin,
+			// 			path: '/',
+			// 			expires: new Date(Date.now() + expiresIn * 1000),
+			// 			httpOnly: true,
+			// 			// secure: true,
+			// 		});
+			// 	}
+
+			// 	res.status(200).send({
+			// 		user: dbUser
+			// 	});
+			// }
+			// else {
+			// 	res.status(401).send('Login credentials invalid!');
+			// }
+		})
+		.catch(function (error) {
+			console.log(error);
+			res.status(500).send('Encountered server error when logging in!');
+		});
 });
 
 // Export these routers

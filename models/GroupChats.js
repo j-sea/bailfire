@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
     const GroupChats = sequelize.define('GroupChats', {
-				user_uuid: DataTypes.UUID,
+        user_uuid: DataTypes.UUID,
         message: DataTypes.STRING,
         edited: {
             type: DataTypes.BOOLEAN,

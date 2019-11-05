@@ -1,4 +1,4 @@
-'use Strict';
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
     const GroupInvites = sequelize.define('GroupInvites', {
