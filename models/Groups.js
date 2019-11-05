@@ -26,12 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     Groups.associate = function (models) {
         //TODO:
-        Groups.hasMany(models.GroupInvites);
-        Groups.hasMany(models.GroupUserDetails);
-        Groups.hasMany(models.GroupChats);
-        Groups.hasMany(models.InterestPoints);
-        Groups.hasMany(models.Alarm);
-        Groups.belongsToMany(models.Users, { through: 'UsersGroupsJT' });
+        // Groups.hasMany(models.GroupInvites);
+        // Groups.hasMany(models.GroupUserDetails);
+        // Groups.hasMany(models.GroupChats);
+        // Groups.hasMany(models.InterestPoints);
+        // Groups.hasMany(models.Alarm);
+        // Groups.belongsToMany(models.Users, { through: 'UsersGroupsJT' });
     };
     return Groups;
 };
