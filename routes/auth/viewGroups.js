@@ -7,12 +7,27 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
+//get all user's groups (if any)
+router.get("/api/group/", function (req, res) {
+    db.Users.findOne({
+        where: {
+            id: req.body.users_id
+        }
+    }).then(function (user) {
+        user.getGroups()
+    }).then(function (dbGroups) {
+        res.json(dbGroups)
+    });
+});
+
+//get route for retrieving a single group 
 router.get("/api/group/:id", function (req, res) {
     // console.log("route called");
     db.Groups.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include: [db.Users]
     }).then(function (specificGroup) {
         // console.log("then function called");
         // sends success status

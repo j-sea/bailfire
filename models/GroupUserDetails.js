@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
         speed: DataTypes.FLOAT,
 
     }, {});
-    GroupUserDetails.associate = function (models) {
-        GroupUserDetails.belongsTo(models.Groups);
-        GroupUserDetails.belongsTo(models.Users);
-    };
+    // GroupUserDetails.associate = function (models) {
+    //     GroupUserDetails.belongsTo(models.Groups);
+    //     GroupUserDetails.belongsTo(models.Users);
+    // };
     return GroupUserDetails;
 }

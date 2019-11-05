@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
 	const Users = sequelize.define('Users', {
+		
+		
 		// user_uuid: {
 		// 	type: DataTypes.UUID,
 		// 	primaryKey: true,
@@ -30,13 +32,24 @@ module.exports = (sequelize, DataTypes) => {
 
 	}, {});
 	Users.associate = function (models) {
-		Users.hasMany(models.GroupInvites);
-		Users.hasMany(models.GroupUserDetails);
-		Users.hasMany(models.GroupChats);
-		Users.hasMany(models.InterestPointChats);
-		Users.belongsToMany(models.Groups, {through:"UserGroups"});
+		// Users.hasMany(models.GroupInvites, {
+		// 	onDelete: "cascade"
+		// });
+		// Users.hasMany(models.GroupUserDetails, {
+		// 	onDelete: "cascade"
+		// });
+		// Users.hasMany(models.GroupChats, {
+		// 	onDelete: "cascade"
+		// });
+		// Users.hasMany(models.InterestPointChats, {
+		// 	onDelete: "cascade"
+		// });
+		Users.hasMany(models.Groups, {
+			onDelete: "cascade"
+		});
 	};
 	Users.beforeCreate(function (user) {
 		user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 	});
-	return Users;
+	return Users
+}

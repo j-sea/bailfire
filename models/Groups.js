@@ -24,12 +24,26 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     Groups.associate = function (models) {
-        Groups.hasMany(models.GroupInvites);
-        Groups.hasMany(models.GroupUserDetails);
-        Groups.hasMany(models.GroupChats);
-        Groups.hasMany(models.InterestPoints);
-        Groups.hasMany(models.Alarm);
-        Groups.belongsToMany(models.Users, { through: 'UserGroups' });
+        // Groups.hasMany(models.GroupInvites, {
+        //     onDelete: "cascade"
+        // });
+        // Groups.hasMany(models.GroupUserDetails, {
+        //     onDelete: "cascade"
+        // });
+        // Groups.hasMany(models.GroupChats, {
+        //     onDelete: "cascade"
+        // });
+        // Groups.hasMany(models.InterestPoints, {
+        //     onDelete: "cascade"
+        // });
+        // Groups.hasMany(models.Alarm, {
+        //     onDelete: "cascade"
+        // });
+        Groups.belongsTo(models.Users, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
     };
     return Groups;
 };

@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     }, {});
-    Alarm.associate = function (models) {
-        Alarm.belongsTo(models.InterestPoints);
-        Alarm.belongsTo(models.Groups);
-    };
+    // Alarm.associate = function (models) {
+    //     Alarm.belongsTo(models.InterestPoints);
+    //     Alarm.belongsTo(models.Groups);
+    // };
     return Alarm;
 }
