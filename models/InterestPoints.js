@@ -2,12 +2,14 @@
 
 module.exports = (sequelize, DataTypes) => {
     const InterestPoints = sequelize.define('InterestPoints', {
+				group_uuid: DataTypes.UUID,
         name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         description: DataTypes.STRING,
-        geolocation: DataTypes.FLOAT,
+        longitude: DataTypes.FLOAT,
+        latitude: DataTypes.FLOAT,
         photo_url: DataTypes.STRING,
         color: {
             type: DataTypes.STRING,
@@ -15,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {});
     InterestPoints.associate = function (models) {
-        InterestPoints.belongsTo(models.Groups);
-        InterestPoints.hasMany(models.InterestPointChats)
-        InterestPoints.hasMany(models.Alarm)
+        // InterestPoints.belongsTo(models.Groups);
+        // InterestPoints.hasMany(models.InterestPointChats)
+        // InterestPoints.hasMany(models.Alarm)
     };
     return InterestPoints;
 }
