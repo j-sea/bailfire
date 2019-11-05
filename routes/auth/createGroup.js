@@ -5,6 +5,7 @@ const db = require('../../models');
 const router = require('express').Router();
 
 router.post("/api/group", function (req, res) {
+	//any user with auth session can create group
 	if (req.session.user) {
 		let newGroup = { ...req.body };
 		newGroup.UserId = req.session.user.id

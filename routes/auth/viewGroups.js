@@ -11,30 +11,35 @@ const router = require('express').Router();
 router.get("/api/group/", function (req, res) {
     db.Users.findOne({
         where: {
-            id: req.body.users_id
+            id: req.session.users.id
         }
     }).then(function (user) {
-        user.getGroups()
-    }).then(function (dbGroups) {
-        res.json(dbGroups)
-    });
+        user.getGroups().then(function (dbGroups) {
+            res.json(dbGroups)
+        });
+    })
 });
 
 //get route for retrieving a single group 
 router.get("/api/group/:id", function (req, res) {
     // console.log("route called");
-    db.Groups.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: [db.Users]
-    }).then(function (specificGroup) {
-        // console.log("then function called");
-        // sends success status
-        res.status(200).send(specificGroup);
-    }).catch(function (err) {
-        throw err
-    })
+    //any user with auth session can create group
+    if (req.session.user) {
+        db.Groups.findOne({
+            where: {
+                id: req.session.users.id
+            },
+        }).then(function (specificGroup) {
+            // console.log("then function called");
+            // sends success status
+            res.status(200).send(specificGroup);
+        }).catch(function (err) {
+            console.log(err);
+            res.status(500).send('Attempt to create group unsuccessful')
+        })
+    } else {
+        res.status(401).send('Please log in first.')
+    }
 });
 
 // Export these routers
