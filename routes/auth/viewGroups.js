@@ -7,11 +7,11 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
-router.get("/api/group/:uuid", function (req, res) {
+router.get("/api/group/:id", function (req, res) {
     // console.log("route called");
     db.Groups.findOne({
         where: {
-            uuid: req.params.uuid
+            id: req.params.id
         }
     }).then(function (specificGroup) {
         // console.log("then function called");

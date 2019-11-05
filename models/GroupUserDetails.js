@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {});
     GroupUserDetails.associate = function (models) {
-        // GroupUserDetails.belongsTo(models.Groups);
-        // GroupUserDetails.belongsTo(models.Users);
+        GroupUserDetails.belongsTo(models.Groups);
+        GroupUserDetails.belongsTo(models.Users);
     };
     return GroupUserDetails;
 }

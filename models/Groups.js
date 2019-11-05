@@ -3,10 +3,11 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
+
         //auto generate UUID format - can be UUIDV1 or UUIDV4
         group_uuid: {
             type: DataTypes.UUID,
-            primaryKey: true,
+            // primaryKey: true,
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
@@ -19,17 +20,16 @@ module.exports = (sequelize, DataTypes) => {
         deleted: {
             type: DataTypes.BOOLEAN,
             default: false,
-            allowNull: false,
+            // allowNull: false,
         },
     });
     Groups.associate = function (models) {
-        //TODO:
-        // Groups.hasMany(models.GroupInvites);
-        // Groups.hasMany(models.GroupUserDetails);
-        // Groups.hasMany(models.GroupChats);
-        // Groups.hasMany(models.InterestPoints);
-        // Groups.hasMany(models.Alarm);
-        // Groups.belongsToMany(models.Users, { through: 'UsersGroupsJT' });
+        Groups.hasMany(models.GroupInvites);
+        Groups.hasMany(models.GroupUserDetails);
+        Groups.hasMany(models.GroupChats);
+        Groups.hasMany(models.InterestPoints);
+        Groups.hasMany(models.Alarm);
+        // Groups.belongsToMany(models.Users, { through: 'Groups' });
     };
     return Groups;
 };

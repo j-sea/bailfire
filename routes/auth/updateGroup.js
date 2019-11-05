@@ -7,11 +7,11 @@ const db = require('../../models');
 // Create an Express Router to allow routing via files external to server.js
 const router = require('express').Router();
 
-router.put("/api/group/:uuid", function (req, res) {
+router.put("/api/group/:id", function (req, res) {
     // console.log(`top log:${req.signedCookies}`);
     db.Groups.update(req.body, {
         where: {
-            uuid: req.params.uuid
+            id: req.params.id
         }
     }).then(function () {
         // sends success status

@@ -24,17 +24,17 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
-				len:[8],
+				len: [8],
 			},
 		},
 
 	}, {});
 	Users.associate = function (models) {
-		// Users.hasMany(models.GroupInvites);
-		// Users.hasMany(models.GroupUserDetails);
-		// Users.hasMany(models.GroupChats);
-		// Users.hasMany(models.InterestPointChats);
-		// Users.belongsToMany(models.Groups, { through: 'UsersGroupsJT' });
+		Users.hasMany(models.GroupInvites);
+		Users.hasMany(models.GroupUserDetails);
+		Users.hasMany(models.GroupChats);
+		Users.hasMany(models.InterestPointChats);
+		// Users.belongsToMany(models.Groups);
 	};
 	Users.beforeCreate(function (user) {
 		user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
