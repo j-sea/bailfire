@@ -28,7 +28,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-	origin: ["https://scatter-web.herokuapp.com","http://localhost:3000"],
+	// origin: ["https://scatter-web.herokuapp.com","http://localhost:3000"],
+	origin: true,
 	credentials: true,
 }));
 
