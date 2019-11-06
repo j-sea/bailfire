@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             default: false
         },
     }, {});
-    // InterestPointChats.associate = function (models) {
-    //     InterestPointChats.belongsTo(models.Users);
-    //     InterestPointChats.belongsTo(models.InterestPoints);
-    // };
+    InterestPointChats.associate = function (models) {
+        InterestPointChats.belongsTo(models.Users);
+        InterestPointChats.belongsTo(models.InterestPoints);
+    };
     return InterestPointChats;
 }

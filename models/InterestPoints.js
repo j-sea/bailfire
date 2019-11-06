@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
     }, {});
-    // InterestPoints.associate = function (models) {
-    //     InterestPoints.belongsTo(models.Groups);
-    //     InterestPoints.hasMany(models.InterestPointChats)
-    //     InterestPoints.hasMany(models.Alarm)
-    // };
+    InterestPoints.associate = function (models) {
+        InterestPoints.belongsTo(models.Groups);
+        InterestPoints.hasMany(models.InterestPointChats)
+        InterestPoints.hasMany(models.Alarm)
+    };
     return InterestPoints;
 }

@@ -24,21 +24,21 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     Groups.associate = function (models) {
-        // Groups.hasMany(models.GroupInvites, {
-        //     onDelete: "cascade"
-        // });
-        // Groups.hasMany(models.GroupUserDetails, {
-        //     onDelete: "cascade"
-        // });
-        // Groups.hasMany(models.GroupChats, {
-        //     onDelete: "cascade"
-        // });
-        // Groups.hasMany(models.InterestPoints, {
-        //     onDelete: "cascade"
-        // });
-        // Groups.hasMany(models.Alarm, {
-        //     onDelete: "cascade"
-        // });
+        Groups.hasMany(models.GroupInvites, {
+            onDelete: "cascade"
+        });
+        Groups.hasMany(models.GroupUserDetails, {
+            onDelete: "cascade"
+        });
+        Groups.hasMany(models.GroupChats, {
+            onDelete: "cascade"
+        });
+        Groups.hasMany(models.InterestPoints, {
+            onDelete: "cascade"
+        });
+        Groups.hasMany(models.Alarm, {
+            onDelete: "cascade"
+        });
         Groups.belongsTo(models.Users, {
             foreignKey: {
                 allowNull: false

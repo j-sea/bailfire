@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
             default: false
         },
     }, {});
-    // GroupChats.associate = function (models) {
-    //     GroupChats.belongsTo(models.Users);
-    //     GroupChats.belongsTo(models.InterestPoints);
-    // }
+    GroupChats.associate = function (models) {
+        GroupChats.belongsTo(models.Users);
+        GroupChats.belongsTo(models.InterestPoints);
+    }
     return GroupChats;
 }
