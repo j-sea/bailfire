@@ -37,10 +37,6 @@ app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: true,
 	saveUninitialized: true,
-	proxy: true,
-	cookie: {
-		sameSite: 'none'
-	}
 }));
 
 // Set up Express to use our external routes
