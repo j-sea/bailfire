@@ -34,7 +34,7 @@ router.put("/api/group/:uuid", function (req, res) {
         }
     }).catch(function (err) {
         console.log(err);
-        res.status(500).send('Could not find group to authorize')
+        res.status(500).send('Could not find group to update')
     })
 })
 

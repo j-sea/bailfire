@@ -7,7 +7,9 @@ const router = require('express').Router();
 router.post("/api/group", function (req, res) {
 	//any user with auth session can create group
 	if (req.session.user) {
+		//splice creates copy of Group
 		let newGroup = { ...req.body };
+		//add new column to table
 		newGroup.UserId = req.session.user.id
 		db.Groups.create(newGroup).then(function (dbGroup) {
 			// sends success status

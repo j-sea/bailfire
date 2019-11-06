@@ -8,34 +8,36 @@ const db = require('../../models');
 const router = require('express').Router();
 
 //get all user's groups (if any)
-router.get("/api/group/", function (req, res) {
-    db.Users.findOne({
+// Kerry: consider renaming this route ex: /api/user/group or /api/user/:id/group
+router.get("/api/user/:id/group", function (req, res) {
+    db.Groups.findAll({
+        //identifies user that we want groups of 
         where: {
-            id: req.session.users.id
+            UserId: req.params.id
         }
-    }).then(function (user) {
-        user.getGroups().then(function (dbGroups) {
-            res.json(dbGroups)
-        });
-    })
-});
+    }).then(function (dbGroups) {
+        res.json(dbGroups)
+    });
+})
+
 
 //get route for retrieving a single group 
-router.get("/api/group/:id", function (req, res) {
+router.get("/api/group/:uuid", function (req, res) {
     // console.log("route called");
     //any user with auth session can create group
     if (req.session.user) {
         db.Groups.findOne({
             where: {
-                id: req.session.users.id
+                group_uuid: req.params.uuid
             },
         }).then(function (specificGroup) {
+            console.log('specific group', specificGroup)
             // console.log("then function called");
             // sends success status
             res.status(200).send(specificGroup);
         }).catch(function (err) {
             console.log(err);
-            res.status(500).send('Attempt to create group unsuccessful')
+            res.status(500).send('Attempt to view group unsuccessful')
         })
     } else {
         res.status(401).send('Please log in first.')
