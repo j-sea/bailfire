@@ -28,11 +28,16 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-	origin: ["https://scatter-web.herokuapp.com", "http://localhost:3000"],
+	// origin: ["https://scatter-web.herokuapp.com","http://localhost:3000"],
+	origin: true,
 	credentials: true,
 }));
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(session({
+	secret: process.env.SESSION_SECRET,
+	resave: true,
+	saveUninitialized: true,
+}));
 
 // Set up Express to use our external routes
 app.use(routes);
