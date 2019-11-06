@@ -2,8 +2,8 @@
 
 module.exports = (sequelize, DataTypes) => {
     const GroupUserDetails = sequelize.define('GroupUserDetails', {
-				group_uuid: DataTypes.UUID,
-				user_uuid: DataTypes.UUID,
+        group_uuid: DataTypes.UUID,
+        user_uuid: DataTypes.UUID,
         name: {
             type: DataTypes.STRING,
             allowNull: false

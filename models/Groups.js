@@ -3,7 +3,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     const Groups = sequelize.define('Groups', {
-
         //auto generate UUID format - can be UUIDV1 or UUIDV4
         group_uuid: {
             type: DataTypes.UUID,
@@ -11,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
-        name: {
+        group_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -22,8 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             default: false,
             allowNull: false,
         },
-
-    }, {});
+    });
     Groups.associate = function (models) {
         //TODO:
         // Groups.hasMany(models.GroupInvites);

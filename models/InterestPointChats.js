@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
     const InterestPointChats = sequelize.define('InterestPointChats', {
-				user_uuid: DataTypes.UUID,
+        user_uuid: DataTypes.UUID,
         message: {
             type: DataTypes.STRING,
             allowNull: false
