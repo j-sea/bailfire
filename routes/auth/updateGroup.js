@@ -8,18 +8,35 @@ const db = require('../../models');
 const router = require('express').Router();
 
 router.put("/api/group/:uuid", function (req, res) {
-    // console.log(`top log:${req.signedCookies}`);
-    db.Groups.update(req.body, {
+    db.Groups.findOne({
         where: {
-            uuid: req.params.uuid
+            group_uuid: req.params.uuid
         }
-    }).then(function () {
-        // sends success status
-        res.status(200).send();
+    }).then(function (group) {
+        //if session user matches user that created group
+        if (req.session.user.id === group.UserId) {
+            //update group by uuid
+            db.Groups.update(req.body, {
+                where: {
+                    group_uuid: group.group_uuid
+                }
+            }).then(function () {
+                // sends success status
+                res.status(200).send();
+                //will throw error if group can't be updated
+            }).catch(function (err) {
+                console.log(err);
+                res.status(500).send('Attempt to update group unsuccessful')
+            })
+        } else {
+            //if session user doesn't match user that created group
+            res.status(401).send('Please log in first.')
+        }
     }).catch(function (err) {
-        throw err
+        console.log(err);
+        res.status(500).send('Could not find group to update')
     })
-});
+})
 
 // Export these routers
 module.exports = router;

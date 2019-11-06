@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {});
     GroupInvites.associate = function (models) {
-        // GroupInvites.belongsTo(models.Groups);
+        GroupInvites.belongsTo(models.Groups);
     };
     return GroupInvites;
 };
