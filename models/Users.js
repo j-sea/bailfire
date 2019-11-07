@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
 		});
 	};
 	Users.beforeCreate(function (user) {
-		if (Object.prototype.hasOwnProperty.call(user, 'password')) {
+		if (Object.prototype.hasOwnProperty.call(user.dataValues, 'password')) {
 			if (typeof user.password === 'string' && user.password !== '') {
 				user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
 			}
