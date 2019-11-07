@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    const Alarm = sequelize.define('Alarm', {
+    const Alarms = sequelize.define('Alarms', {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     }, {});
-    Alarm.associate = function (models) {
-        Alarm.belongsTo(models.InterestPoints);
-        Alarm.belongsTo(models.Groups);
+    Alarms.associate = function (models) {
+        Alarms.belongsTo(models.InterestPoints);
+        Alarms.belongsTo(models.Groups);
     };
-    return Alarm;
+    return Alarms;
 }

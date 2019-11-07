@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         Groups.hasMany(models.InterestPoints, {
             onDelete: "cascade"
         });
-        Groups.hasMany(models.Alarm, {
+        Groups.hasMany(models.Alarms, {
             onDelete: "cascade"
         });
         Groups.belongsTo(models.Users, {
