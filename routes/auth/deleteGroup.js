@@ -13,24 +13,24 @@ router.delete("/api/group/:uuid", function (req, res) {
         }
     }).then(function (group) {
         //verify if session user matches person that created group
-        if (req.session.user.id === group.UserId) {
-            //if yes, delete group by matching group uuid
-            db.Groups.destroy(req.body, {
-                where: {
-                    group_uuid: group.group_uuid
-                }
-            }).then(function () {
-                //and sends success status
-                res.status(200).send();
-                //if delete unsuccessful, advise user
-            }).catch(function (err) {
-                console.log(err);
-                res.status(500).send('Attempt to delete group unsuccessful')
-            });
-        } else {
-            //if user unauthorized to delete group, advise user
-            res.status(401).send('Unauthorized to delete group')
-        }
+        // if (req.session.user && req.session.user.id === group.UserId) {
+        //if yes, delete group by matching group uuid
+        db.Groups.destroy({
+            where: {
+                group_uuid: group.group_uuid
+            }
+        }).then(function () {
+            //and sends success status
+            res.status(200).send();
+            //if delete unsuccessful, advise user
+        }).catch(function (err) {
+            console.log(err);
+            res.status(500).send('Attempt to delete group unsuccessful')
+        });
+        // } else {
+        //     //if user unauthorized to delete group, advise user
+        //     res.status(401).send('Unauthorized to delete group')
+        // }
     }).catch(function (err) {
         //if group uuid is invalid, advise user
         console.log(err);

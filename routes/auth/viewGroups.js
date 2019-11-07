@@ -9,11 +9,11 @@ const router = require('express').Router();
 
 //get all user's groups (if any)
 // Kerry: consider renaming this route ex: /api/user/group or /api/user/:id/group
-router.get("/api/user/:id/group", function (req, res) {
+router.get("/api/user/group", function (req, res) {
     db.Groups.findAll({
         //identifies user that we want groups of 
         where: {
-            UserId: req.params.id
+            UserId: req.session.user.id
         }
     }).then(function (dbGroups) {
         res.json(dbGroups)
