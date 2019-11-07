@@ -13,9 +13,9 @@ router.delete("/api/group/:uuid", function (req, res) {
         }
     }).then(function (group) {
         //verify if session user matches person that created group
-        if (req.session.user.id === group.UserId) {
+        if (req.session.user && req.session.user.id === group.UserId) {
             //if yes, delete group by matching group uuid
-            db.Groups.destroy(req.body, {
+            db.Groups.destroy({
                 where: {
                     group_uuid: group.group_uuid
                 }
