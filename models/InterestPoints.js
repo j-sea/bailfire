@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     InterestPoints.associate = function (models) {
         InterestPoints.belongsTo(models.Groups);
         InterestPoints.hasMany(models.InterestPointChats)
-        InterestPoints.hasMany(models.Alarm)
+        InterestPoints.hasMany(models.Alarms)
     };
     return InterestPoints;
 }
