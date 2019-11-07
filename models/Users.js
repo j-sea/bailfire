@@ -6,25 +6,25 @@ module.exports = (sequelize, DataTypes) => {
 	const Users = sequelize.define('Users', {
 
 
-		// user_uuid: {
-		// 	type: DataTypes.UUID,
-		// 	primaryKey: true,
-		// 	allowNull: false,
-		// 	defaultValue: DataTypes.UUIDV4
-		// },
+		user_uuid: {
+			type: DataTypes.UUID,
+			// primaryKey: true,
+			allowNull: false,
+			defaultValue: DataTypes.UUIDV4
+		},
 		email: {
 			type: DataTypes.STRING,
 			allowNull: true,
 			unique: true,
 		},
 		phone: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.BIGINT.UNSIGNED,
 			allowNull: true,
 			unique: true,
 		},
 		password: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			allowNull: true,
 			validate: {
 				len: [8],
 			},
@@ -49,7 +49,14 @@ module.exports = (sequelize, DataTypes) => {
 		});
 	};
 	Users.beforeCreate(function (user) {
-		user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+		if (Object.prototype.hasOwnProperty.call(user, 'password')) {
+			if (typeof user.password === 'string' && user.password !== '') {
+				user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+			}
+			else {
+				throw new Error('Incorrect account credentials');
+			}
+		}
 	});
 	return Users
 }
