@@ -7,13 +7,15 @@ const router = require('express').Router();
 router.delete("/api/group/:uuid", function (req, res) {
     //find group that..
     db.Groups.findOne({
-        //..matches group uuid that user wants to delete
+        //matches uuid that user wants to delete (pulled from browser address)
         where: {
             group_uuid: req.params.uuid
         }
     }).then(function (group) {
+        console.log(req.session);
+
         //verify if session user matches person that created group
-        if (req.session.user && req.session.user.id === group.UserId) {
+        if (req.session.user && req.session.user.id === group.dataValues.UserId) {
             //if yes, delete group by matching group uuid
             db.Groups.destroy({
                 where: {
