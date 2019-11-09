@@ -2,6 +2,7 @@
 const router = require('express').Router();
 
 router.post("/auth/logout", function (req, res) {
+	console.log('logout triggered')
 	req.session.destroy(function () {
 		res.status(200).send('successfully logged out')
 	});
