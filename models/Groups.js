@@ -15,8 +15,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        description: DataTypes.STRING,
-
+        description: {
+					type: DataTypes.STRING,
+					allowNull: false,
+					defaultValue: '',
+				},
         deleted: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
