@@ -20,9 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         longitude: DataTypes.FLOAT,
         latitude: DataTypes.FLOAT,
-        geolocation_accuracy: {
-            type: DataTypes.FLOAT,
-        },
+        geolocation_accuracy: DataTypes.FLOAT,
         altitude: DataTypes.FLOAT,
         altitude_accuracy: DataTypes.FLOAT,
         heading: DataTypes.FLOAT,

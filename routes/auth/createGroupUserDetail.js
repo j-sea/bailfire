@@ -21,14 +21,27 @@ router.post("/api/group-user/create", function (req, res) {
 				randomColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
 			}
 
-			db.GroupsUserDetails
+			db.GroupsUserDetails.create({
+				group_uuid: req.body.group_uuid,
+				user_uuid: req.session.user.user_uuid,
+				invite_uuid: req.body.invite_uuid,
+				color: randomColor,
+				name: req.body.name,
+				description: req.body.description,
+			})
+			.then(function (groupUserDetail) {
+				
+			})
+			.catch(function (error) {
+				res.status(500).send('Server encountered error when creating group user details.');
+			})
 		})
 		.catch(function (error) {
-
+			res.status(500).send('Server encountered error when creating group user details.');
 		});
 	}
 	else {
-		res.status(401).send('Please log in first.')
+		res.status(401).send('Please log in first.');
 	}
 
 });
