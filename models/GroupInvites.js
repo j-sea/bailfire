@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         guest_user_uuid: {
             type: DataTypes.UUID,
-            unique: true
         },
         accepted: {
             type: DataTypes.BOOLEAN,
