@@ -1,5 +1,6 @@
 // Import necessary Node.js files
 const db = require('../../models');
+const { Op } = require('sequelize');
 
 //verifies whether person making group is authorized user
 // require('dotenv').config();
@@ -10,14 +11,39 @@ const router = require('express').Router();
 //get all user's groups (if any)
 // Kerry: consider renaming this route ex: /api/user/group or /api/user/:id/group
 router.get("/api/user/group", function (req, res) {
-    db.Groups.findAll({
-        //identifies user that we want groups of 
-        where: {
-            UserId: req.session.user.id
-        }
-    }).then(function (dbGroups) {
-        res.json(dbGroups)
-    });
+    // db.Groups.findAll({
+    //     //identifies user that we want groups of 
+    //     where: {
+    //         UserId: req.session.user.id
+    //     }
+    // }).then(function (dbGroups) {
+    //     res.json(dbGroups)
+		// });
+
+		// Grab all of the group user details related to this user
+		db.GroupUserDetails.findAll({
+			where: {
+				user_uuid: req.session.user.user_uuid,
+			}
+		})
+		.then(function (groupUserDetails) {
+			// Grab all of the group UUIDs related to groups this user is a part of
+			const groups = groupUserDetails.map(function (groupUserDetail) {
+				return groupUserDetail.group_uuid;
+			});
+
+			// Grab all of the groups we want 
+			db.Groups.findAll({
+				where: {
+					group_uuid: {
+						[Op.or]: groups,
+					}
+				}
+			})
+			.then(function (groups) {
+				res.json(groups);
+			})
+		})
 })
 
 
