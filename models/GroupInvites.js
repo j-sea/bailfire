@@ -27,6 +27,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false,
             allowNull: false,
         },
+        email: DataTypes.STRING,
+        phone: DataTypes.BIGINT,
     }, {});
     GroupInvites.associate = function (models) {
         GroupInvites.belongsTo(models.Groups);
