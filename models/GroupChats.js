@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         message: DataTypes.STRING,
         edited: {
             type: DataTypes.BOOLEAN,
-            default: false
+            defaultValue: false
         },
     }, {});
     GroupChats.associate = function (models) {

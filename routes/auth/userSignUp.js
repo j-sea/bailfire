@@ -9,12 +9,14 @@ const router = require('express').Router();
 router.post("/auth/register", function (req, res) {
 	//called SPREAD and makes new copy of object
 	const newUserData = { ...req.body };
+
 	//checks if newUserData has phone property AND it isn't an empty string
 	if (Object.prototype.hasOwnProperty.call(newUserData, 'phone') && newUserData.phone !== '') {
 		//parses string and returns integer
 		newUserData.phone = parseInt(newUserData.phone);
 	}
-	//check to see if a sting password was entered, if so...
+
+	//check to see if a password was entered, if so...
 	if (Object.prototype.hasOwnProperty.call(newUserData, 'password')) {
 		//checks to see if either email or phone was entered, if so...
 		if (Object.prototype.hasOwnProperty.call(newUserData, 'email') || Object.prototype.hasOwnProperty.call(newUserData, 'phone')) {
@@ -58,28 +60,12 @@ router.post("/auth/register", function (req, res) {
 			res.status(500).send('Server encountered error when registering user!');
 		}
 	}
+	// If no password was provided
 	else {
-		if (!Object.prototype.hasOwnProperty.call(newUserData, 'email') && !Object.prototype.hasOwnProperty.call(newUserData, 'phone')) {
-			db.Users.create(newUserData)
-				.then(function (newUser) {
-					//create new session property "user", set equal to logged in user
-					req.session.user = { id: newUser.id, email: newUser.email, phone: newUser.phone, user_uuid: newUser.user_uuid }
-					req.session.error = null;
-					res.status(200).json(req.session);
-				})
-				.catch(function (error) {
-					console.log(error);
-					req.session.user = false;
-					req.session.error = 'Server encountered error when registering user!';
-					res.status(500).send('Server encountered error when registering user!');
-				});
-		}
-		else {
-			console.log('Providing an email or phone with no password is invalid')
-			req.session.user = false;
-			req.session.error = 'Server encountered error when registering user!';
-			res.status(500).send('Server encountered error when registering user!');
-		}
+		console.log('Providing no password is invalid')
+		req.session.user = false;
+		req.session.error = 'Server encountered error when registering user!';
+		res.status(500).send('Server encountered error when registering user!');
 	}
 });
 
