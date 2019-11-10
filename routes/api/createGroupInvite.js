@@ -12,15 +12,13 @@ router.post("/api/group-invite", function (req, res) {
 			// Find the group
 			db.Groups.findOne({
 				where: {
-					id: req.body.group_uuid
+					group_uuid: req.body.group_uuid
 				}
 			}).then(function(group){
 				// Check if the logged in user is the admin of the group
 				if (group.UserId === req.session.user.id) {
 					// Create a new group invite
-					db.GroupInvites.create({
-						group_uuid: req.body.group_uuid
-					})
+					db.GroupInvites.create(req.body)
 					.then(function (groupInvite) {
 						// Send the group invite back to the requester
 						res.status(200).json(groupInvite);
