@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         accepted: {
             type: DataTypes.BOOLEAN,
-            default: false,
+            defaultValue: false,
             allowNull: false,
         },
         rejected: {
             type: DataTypes.BOOLEAN,
-            default: false,
+            defaultValue: false,
             allowNull: false,
         },
 

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         edited: {
             type: DataTypes.BOOLEAN,
-            default: false
+            defaultValue: false
         },
     }, {});
     InterestPointChats.associate = function (models) {
