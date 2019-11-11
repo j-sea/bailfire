@@ -1,13 +1,9 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
-const twilio = require('twilio');
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
-// Create an Express Router to allow routing via files external to server.js
-const router = require('express').Router();
-
-router.post('/api/email', function (req, res) {
+module.exports = function (email, inviteUUID) {
     // nodemailer & OAuth
     const oauth2Client = new OAuth2(
         process.env.OAUTH_CLIENT_ID,    
@@ -35,13 +31,20 @@ router.post('/api/email', function (req, res) {
          }
     });
     
+    const urlPrepend = (process.env.PORT) ? 'https://scatter-web.herokuapp.com' : 'http://localhost:3000';
     // Here we give our email some content
     const mailOptions = {
          from: "skatterbailfire@gmail.com",
-         to: "skatterbailfire@gmail.com, msantiago2222@yahoo.com",
-         subject: "Node.js Email with Secure OAuth",
+         to: email,
+         subject: "Someone has sent you a ScATTeR group invite!",
          generateTextFromHTML: true,
-         html: "<b>test</b>"
+         html: "<h1>Someone has sent you a ScATTeR group invite!</h1> \
+               <p>If you don't know who sent this, or you aren't expecting an invite, <b>please</b> ignore this e-mail.</p> \
+               <p>ScATTeR is a Group Locating app where you can keep your group outings coordinated between members.</p> \
+               <p>Your location is shared to your group automatically, when you want.</p> \
+               <p>If you are sure you want to join this person's ScATTeR group and share your location, click here to <b>accept the invite</b>: <a href=\"" + urlPrepend + "/group-invite/accept/" + inviteUUID + "\">" + urlPrepend + "/group-invite/accept/" + inviteUUID + "</a></p> \
+               <p>If you don't want to join this person's ScATTeR group, either ignore this e-mail or click here to <b>reject the invite</b>: <a href=\"" + urlPrepend + "/group-invite/reject/" + inviteUUID + "\">" + urlPrepend + "/group-invite/reject/" + inviteUUID + "</a></p> \
+               <p>If you'd like to learn more about ScATTeR, click here: <a href=\"https://scatter-web.herokuapp.com/\">https://scatter-web.herokuapp.com/</a></p>"
     };
     
     // This sends our email
@@ -49,7 +52,4 @@ router.post('/api/email', function (req, res) {
          error ? console.log(error) : console.log(response);
          smtpTransport.close();
     });
-});
-
-
-module.exports = router;
+};
