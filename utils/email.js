@@ -36,9 +36,9 @@ module.exports = function (email, inviteUUID) {
     const mailOptions = {
          from: "skatterbailfire@gmail.com",
          to: email,
-         subject: "Someone has sent you a ScATTeR groups invite!",
+         subject: "Someone has sent you a ScATTeR group invite!",
          generateTextFromHTML: true,
-         html: "<h1>Someone has sent you a ScATTeR groups invite!</h1> \
+         html: "<h1>Someone has sent you a ScATTeR group invite!</h1> \
                <p>If you don't know who sent this, or you aren't expecting an invite, <b>please</b> ignore this e-mail.</p> \
                <p>ScATTeR is a Group Locating app where you can keep your group outings coordinated between members.</p> \
                <p>Your location is shared to your group automatically when you want.</p> \
