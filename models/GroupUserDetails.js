@@ -18,14 +18,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        longitude: DataTypes.FLOAT,
-        latitude: DataTypes.FLOAT,
-        geolocation_accuracy: DataTypes.FLOAT,
-        altitude: DataTypes.FLOAT,
-        altitude_accuracy: DataTypes.FLOAT,
-        heading: DataTypes.FLOAT,
-        speed: DataTypes.FLOAT,
-
+        longitude: DataTypes.DOUBLE,
+        latitude: DataTypes.DOUBLE,
+        geolocation_accuracy: DataTypes.DOUBLE,
+        altitude: DataTypes.DOUBLE,
+        altitude_accuracy: DataTypes.DOUBLE,
+        heading: DataTypes.DOUBLE,
+        speed: DataTypes.DOUBLE,
+        locatingEnabled: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false,
+        },
     }, {});
     GroupUserDetails.associate = function (models) {
         GroupUserDetails.belongsTo(models.Groups);

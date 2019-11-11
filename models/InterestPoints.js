@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         description: DataTypes.STRING,
-        longitude: DataTypes.FLOAT,
-        latitude: DataTypes.FLOAT,
+        longitude: DataTypes.DOUBLE,
+        latitude: DataTypes.DOUBLE,
         photo_url: DataTypes.STRING,
         color: {
             type: DataTypes.STRING,
