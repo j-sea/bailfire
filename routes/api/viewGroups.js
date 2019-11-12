@@ -19,41 +19,43 @@ router.get("/api/user/group", function (req, res) {
     //     res.json(dbGroups)
     // });
 
-    // Grab all of the group user details related to this user
-    db.GroupUserDetails.findAll({
-        where: {
-            user_uuid: req.session.user.user_uuid,
-        }
-    })
-        .then(function (groupUserDetails) {
-            // If the user has associated groups
-            if (groupUserDetails.length !== 0) {
-                // Grab all of the group UUIDs related to groups this user is a part of
-                const groups = groupUserDetails.map(function (groupUserDetail) {
-                    return groupUserDetail.group_uuid;
-                });
-
-                // Grab all of the groups we want 
-                db.Groups.findAll({
-                    where: {
-                        group_uuid: {
-                            [Op.or]: groups,
-                        }
-                    }
-                })
-                    .then(function (groups) {
-                        res.status(200).json(groups);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        res.status(500).send('Server encountered error when retrieving groups');
-                    })
-            }
-            // No groups, return an empty array to the requester
-            else {
-                res.status(200).send([]);
+    if (req.session.user) {
+        // Grab all of the group user details related to this user
+        db.GroupUserDetails.findAll({
+            where: {
+                user_uuid: req.session.user.user_uuid,
             }
         })
+            .then(function (groupUserDetails) {
+                // If the user has associated groups
+                if (groupUserDetails.length !== 0) {
+                    // Grab all of the group UUIDs related to groups this user is a part of
+                    const groups = groupUserDetails.map(function (groupUserDetail) {
+                        return groupUserDetail.group_uuid;
+                    });
+
+                    // Grab all of the groups we want 
+                    db.Groups.findAll({
+                        where: {
+                            group_uuid: {
+                                [Op.or]: groups,
+                            }
+                        }
+                    })
+                        .then(function (groups) {
+                            res.status(200).json(groups);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                            res.status(500).send('Server encountered error when retrieving groups');
+                        })
+                }
+                // No groups, return an empty array to the requester
+                else {
+                    res.status(200).send([]);
+                }
+            })
+    }
 })
 
 

@@ -4,19 +4,25 @@ const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 
 module.exports = function (email, inviteUUID) {
+     console.log('Working on setting up e-mail');
+
     // nodemailer & OAuth
     const oauth2Client = new OAuth2(
         process.env.OAUTH_CLIENT_ID,    
         process.env.OAUTH_CLIENT_SECRET,
          "https://developers.google.com/oauthplayground" // Redirect URL
     );
-    
+
+    console.log('Set up OAuth2');
+
     // nodemailer & OAuth - Uses the Refresh token to get an Access token from OAuth.
     oauth2Client.setCredentials({
          refresh_token: process.env.OAUTH_REFRESH_TOKEN
     });
+    console.log('Set OAuth2 Client Credentials');
     
-    const accessToken = oauth2Client.getAccessToken()
+    const accessToken = oauth2Client.getAccessToken();
+    console.log('Retrieved access token: ' + accessToken);
     
     // nodemailer & OAuth - Describes how we want to send the email using SMTP and Nodemailer
     const smtpTransport = nodemailer.createTransport({
@@ -30,8 +36,10 @@ module.exports = function (email, inviteUUID) {
               accessToken: accessToken
          }
     });
+    console.log('Created nodemail transport');
     
     const urlPrepend = (process.env.PORT) ? 'https://scatter-web.herokuapp.com' : 'http://localhost:3000';
+    console.log('URL Prepend: ' + urlPrepend);
     // Here we give our email some content
     const mailOptions = {
          from: "skatterbailfire@gmail.com",
@@ -46,10 +54,13 @@ module.exports = function (email, inviteUUID) {
                <p>If you don't want to join this person's ScATTeR group, either ignore this e-mail or click here to <b>reject the invite</b>: <a href=\"" + urlPrepend + "/group-invite/reject/" + inviteUUID + "\">" + urlPrepend + "/group-invite/reject/" + inviteUUID + "</a></p> \
                <p>If you'd like to learn more about ScATTeR, click here: <a href=\"https://scatter-web.herokuapp.com/\">https://scatter-web.herokuapp.com/</a></p>"
     };
-    
+    console.log(mailOptions);
+
+    console.log('sending email');
     // This sends our email
     smtpTransport.sendMail(mailOptions, (error, response) => {
          error ? console.log(error) : console.log(response);
          smtpTransport.close();
-    });
+         console.log('email should have sent by this point');
+     });
 };

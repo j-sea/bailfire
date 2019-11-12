@@ -42,7 +42,7 @@ router.post("/auth/login", function (req, res) {
 			.then(function (dbUser) {
 				if (!dbUser) {
 					res.status(401).send('Login credentials incorrect!');
-					alert('No user found with those credentials. Please create an account.')
+					console.log('No user found with those credentials. Please create an account.')
 				}
 				else {
 					if (bcrypt.compareSync(req.body.password, dbUser.password)) {
