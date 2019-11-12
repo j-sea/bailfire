@@ -40,7 +40,16 @@ router.post("/api/group", function (req, res) {
 						// Let's generate a group invite they can send someone who will then have a guest user created for them when they accept the invite
 						if (Object.prototype.hasOwnProperty.call(dbGroup.dataValues, 'group_uuid')) {
 							// Create a new group invite
-							db.GroupInvites.create({group_uuid: dbGroup.group_uuid})
+							const inviteData = {
+								group_uuid: dbGroup.group_uuid,
+							};
+							if (person.type === 'email') {
+								inviteData['email'] = person.value;
+							}
+							else if (person.type === 'phone') {
+								inviteData['phone'] = person.value;
+							}
+							db.GroupInvites.create(inviteData)
 							.then(function (groupInvite) {
 								if (person.type === 'email') {
 									// Send an e-mail invite
