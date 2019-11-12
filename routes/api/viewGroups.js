@@ -87,8 +87,8 @@ router.get("/api/group/:uuid", function (req, res) {
                             },
                             raw: true
                             //once user details found, sending it back as part of response
-                        }).then(function (addedPeople) {
-                            return { ...specificGroup, addedPeople }
+                        }).then(function (existingPeople) {
+                            return { ...specificGroup, existingPeople }
                         })
                     })
                         .then(function (specificGroup) {
