@@ -29,6 +29,9 @@ router.post("/auth/register", function (req, res) {
 				//check if user entered #, if not, then delete empty string field
 				if (newUserData.phone === '') {
 					delete newUserData.phone
+					//check if user entered email, if not, then delete empty string field
+				} else if (newUserData.email === '') {
+					delete newUserData.email
 				}
 				//then create new user in DB
 				db.Users.create(newUserData)
