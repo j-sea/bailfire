@@ -7,7 +7,13 @@ module.exports = function (phone, inviteUUID) {
     var client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
     client.messages
         .create({
-            body: 'ScATTeR Group Invite:\n' + urlPrepend + '/group-invite/accept/' + inviteUUID + '\n' + urlPrepend + '/group-invite/reject/' + inviteUUID,
+            // body: 'To ACCEPT ScATTeR Group Invite:\n' + urlPrepend + '/group-invite/accept/' + inviteUUID + '\n\nTo DECLINE ScATTeR Group Invite:\n' + urlPrepend + '/group-invite/reject/' + inviteUUID,
+            body:
+                `To ACCEPT ScATTeR Group Invite:
+${urlPrepend}/group-invite/accept/${inviteUUID}
+
+To DECLINE ScATTeR Group Invite:
+${urlPrepend}/group-invite/reject/${inviteUUID}`,
             to: phone,  // Text this number
             from: process.env.TWILIO_NUMBER // From a valid Twilio number
         })
